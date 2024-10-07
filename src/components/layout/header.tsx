@@ -17,7 +17,7 @@ const Header = () => {
   }, [isMobile]);
 
   return (
-    <header className="p-4">
+    <header className="py-4 px-8">
       {isMobile ? (
         <div className="relative flex items-center justify-between">
           <Bars3BottomLeftIcon
@@ -41,13 +41,13 @@ const Header = () => {
         </div>
       ) : (
         <div className="grid grid-cols-12 items-center gap-4">
-          <div className="col-span-2 ml-8">
+          <div className="col-span-2">
             <span className="animate-pulse text-2xl">12:51</span>
           </div>
           <div className="col-span-8 flex justify-center">
             <Navbar />
           </div>
-          <div className="col-span-2 flex justify-end mr-8">
+          <div className="col-span-2 flex justify-end">
             <Switch size="small" />
           </div>
         </div>

@@ -30,12 +30,12 @@ const About = () => {
         </div>
       </div>
       <div className="py-12 px-4">
-        <h2 className="text-3xl font-semibold mb-4">About Us</h2>
+        {/* <h2 className="text-3xl font-semibold mb-4">About Us</h2>
         <p className="text-lg">
           This section appears below the background image. Lorem ipsum dolor sit
           amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.
           Sed cursus ante dapibus diam.
-        </p>
+        </p> */}
       </div>
     </Layout>
   );

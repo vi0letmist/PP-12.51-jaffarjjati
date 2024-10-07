@@ -5,7 +5,7 @@ interface ButtonProps {
   onClick?: () => void;
   children?: React.ReactNode;
   size?: "sm" | "md" | "lg";
-  color?: "blue" | "green" | "red" | "gray" | "indigo";
+  color?: "blue" | "green" | "red" | "gray" | "indigo" | "black" | "white"; // Added black and white
   className?: string;
   type?: "button" | "submit" | "reset";
   icon?: keyof typeof HeroIcons; // Specify icon name based on HeroIcons
@@ -24,6 +24,8 @@ const colorClasses = {
   red: "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500",
   gray: "bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-500",
   indigo: "bg-indigo-500 text-white hover:bg-indigo-600 focus:ring-indigo-500",
+  black: "bg-black text-white hover:bg-gray-800 focus:ring-gray-700", // Added black
+  white: "bg-white text-black hover:bg-gray-200 focus:ring-gray-300", // Added white
 };
 
 const Button: React.FC<ButtonProps> = ({

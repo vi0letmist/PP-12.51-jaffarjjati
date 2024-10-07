@@ -30,7 +30,7 @@ const Layout: React.FC<LayoutProps> = ({
         )}
         <Header />
         <main
-          className={`flex-1 ${hasBackgroundImage && backgroundImage ? "relative z-10" : ""}`}
+          className={`flex-1 py-4 px-8 ${hasBackgroundImage && backgroundImage ? "relative z-10" : ""}`}
         >
           {children}
         </main>
