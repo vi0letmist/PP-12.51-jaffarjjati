@@ -34,8 +34,8 @@ const Home = () => {
             Engineer
           </h1>
         </div>
-        <div className="flex justify-between">
-          <div className="flex gap-4 p-4 items-baseline flex-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 flex gap-4">
+          <div className="md:col-span-1 flex gap-4 items-baseline justify-center md:justify-start p-2">
             <Social
               iconCustom={LinkedInIcon}
               size="sm"
@@ -59,7 +59,7 @@ const Home = () => {
               }
             />
           </div>
-          <div className="p-4 flex-shrink-0">
+          <div className="md:col-span-1 p-2">
             <Image
               src={photoProfile}
               alt="Description of the image"
@@ -68,22 +68,53 @@ const Home = () => {
               layout="responsive"
             />
           </div>
-          <div className="p-4 flex-1 mx-auto flex justify-end items-baseline">
-            <Button color="black" onClick={() => console.log("Icon Only")}>
-              let's the journey start
-            </Button>
+          <div className="md:col-span-1 flex justify-center md:justify-end p-2">
+            <div>
+              <Button color="black" onClick={() => console.log("Icon Only")}>
+                let's the journey start
+              </Button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Content Below Background Image */}
-      <div className="py-12 px-4">
-        <h2 className="text-3xl font-semibold mb-4">About Us</h2>
-        <p className="text-lg">
-          This section appears below the background image. Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.
-          Sed cursus ante dapibus diam.
-        </p>
+      {/* About */}
+      <div className="py-12 px-4" id="about">
+        <h1 className="text-[3rem] sm:text-[6rem] lg:text-[8rem] font-bold font-lauren-thompson uppercase mb-4">
+          About
+        </h1>
+        <div>
+          <h2 className="text-[1rem] sm:text-[2rem] lg:text-[4rem] font-bold font-lauren-thompson uppercase">
+            Profile
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="md:col-span-1">
+              <h3 className="text-xl font-semibold">intro</h3>
+              <p>hai my name jetri from the side to side</p>
+            </div>
+            <div className="md:col-start-3 md:col-span-2">
+              <p>
+                i can explain a lot of word about why i like poetry so much, i
+                can explain a lot of word about why i like poetry so much, i can
+                explain a lot of word about why i like poetry so much, i can
+                explain a lot of word about why i like poetry so much, i can
+                explain a lot of word about why i like poetry so much
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Latest Work */}
+      <div className="py-12 px-4" id="latest-work">
+        <h1 className="text-[3rem] sm:text-[6rem] lg:text-[8rem] font-bold font-lauren-thompson uppercase mb-4">
+          Latest Work
+        </h1>
+        <div>
+          <h2 className="text-[1rem] sm:text-[2rem] lg:text-[4rem] font-bold font-lauren-thompson uppercase">
+            PT Aino Indonesia
+          </h2>
+        </div>
       </div>
     </Layout>
   );
