@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 import Layout from "@/components/layout/layout";
 import Button from "@/components/common/button";
@@ -9,7 +11,12 @@ import GithubIcon from "@/components/icons/github";
 import InstagramIcon from "@/components/icons/instagram";
 import photoProfile from "@/assets/images/julian.jpg";
 
+const sentence = "hai my name jetri from the side to side";
+const words = sentence.split(" ");
+
 const Home = () => {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+
   const handleSocialClick = (url: string) => {
     window.open(url, "_blank");
   };
@@ -90,7 +97,20 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="md:col-span-1">
               <h3 className="text-xl font-semibold">intro</h3>
-              <p>hai my name jetri from the side to side</p>
+              <p ref={ref}>
+                {words.map((word, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: false }} // Change this to false to allow repeated animations
+                    transition={{ delay: index * 0.2, duration: 0.5 }}
+                    style={{ display: "inline-block", marginRight: "4px" }}
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </p>
             </div>
             <div className="md:col-start-3 md:col-span-2">
               <p>
@@ -111,9 +131,40 @@ const Home = () => {
           Latest Work
         </h1>
         <div>
-          <h2 className="text-[1rem] sm:text-[2rem] lg:text-[4rem] font-bold font-lauren-thompson uppercase">
-            PT Aino Indonesia
-          </h2>
+          <div className="relative border-2 border-black z-10">
+            {/* Red border outside, placed behind */}
+            <div className="absolute inset-0 border-2 border-black -m-6 top-[2.75rem] left-[2.75rem] pointer-events-none z-0"></div>
+
+            {/* Card content with black border */}
+            <div className="relative z-10">
+              <div className="border-b px-4 grid grid-cols-2 bg-white">
+                <div className="col-span-1">
+                  <h2 className="text-[1rem] sm:text-[2rem] lg:text-[4rem] font-bold font-lauren-thompson uppercase">
+                    PT Aino Indonesia
+                  </h2>
+                </div>
+                <div className="col-span-1 flex justify-end items-center">
+                  <div>
+                    <Button
+                      icon="ArrowUpRightIcon"
+                      color="white"
+                      className="border border-black"
+                      onClick={() => console.log("Icon Only")}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="border-t-2 border-black">
+                <Image
+                  src={BgTreeBW}
+                  alt="Description of the image"
+                  width={100}
+                  height={100}
+                  layout="responsive"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </Layout>

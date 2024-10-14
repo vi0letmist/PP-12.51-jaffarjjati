@@ -41,11 +41,15 @@ const Button: React.FC<ButtonProps> = ({
   // Dynamically get the Icon component from HeroIcons
   const IconComponent = icon ? HeroIcons[icon] : null;
 
+  // Define size and padding classes conditionally
+  const sizeClass = children ? sizeClasses[size] : ""; // Only apply size if there are children
+  const iconOnlyClasses = !children ? "w-10 h-10" : ""; // Ensure button is square if icon-only
+
   return (
     <button
       onClick={onClick}
       type={type}
-      className={`rounded focus:outline-none focus:ring-2 flex items-center justify-center ${sizeClasses[size]} ${colorClasses[color]} ${className}`}
+      className={`rounded focus:outline-none focus:ring-2 flex items-center justify-center ${sizeClass} ${colorClasses[color]} ${iconOnlyClasses} ${className}`}
     >
       {/* Render icon only if no children are provided (icon-only) */}
       {!children && IconComponent && <IconComponent className="h-5 w-5" />}
