@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import * as HeroIcons from "@heroicons/react/24/solid";
 

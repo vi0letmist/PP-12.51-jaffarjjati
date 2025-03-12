@@ -94,7 +94,7 @@ const Home = () => {
                 color={`${isDarkMode ? "white" : "black"}`}
                 onClick={() => console.log("Icon Only")}
               >
-                let's the journey start
+                let&apos;s the journey start
               </Button>
             </div>
           </div>
