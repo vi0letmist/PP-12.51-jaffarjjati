@@ -1,14 +1,14 @@
 import React from "react";
-import * as HeroIcons from "@heroicons/react/24/solid"; // Import all icons
+import * as HeroIcons from "@heroicons/react/24/solid";
 
 interface ButtonProps {
   onClick?: () => void;
   children?: React.ReactNode;
   size?: "sm" | "md" | "lg";
-  color?: "blue" | "green" | "red" | "gray" | "indigo" | "black" | "white"; // Added black and white
+  color?: "blue" | "green" | "red" | "gray" | "indigo" | "black" | "white";
   className?: string;
   type?: "button" | "submit" | "reset";
-  icon?: keyof typeof HeroIcons; // Specify icon name based on HeroIcons
+  icon?: keyof typeof HeroIcons;
   iconPosition?: "left" | "right";
 }
 
@@ -24,8 +24,9 @@ const colorClasses = {
   red: "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500",
   gray: "bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-500",
   indigo: "bg-indigo-500 text-white hover:bg-indigo-600 focus:ring-indigo-500",
-  black: "bg-black text-white hover:bg-gray-800 focus:ring-gray-700", // Added black
-  white: "bg-white text-black hover:bg-gray-200 focus:ring-gray-300", // Added white
+  black:
+    "bg-black text-white hover:bg-yellow-300 hover:text-black focus:ring-gray-700",
+  white: "bg-white text-black hover:bg-yellow-300 focus:ring-gray-300",
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -38,12 +39,10 @@ const Button: React.FC<ButtonProps> = ({
   icon,
   iconPosition = "left",
 }) => {
-  // Dynamically get the Icon component from HeroIcons
   const IconComponent = icon ? HeroIcons[icon] : null;
 
-  // Define size and padding classes conditionally
-  const sizeClass = children ? sizeClasses[size] : ""; // Only apply size if there are children
-  const iconOnlyClasses = !children ? "w-10 h-10" : ""; // Ensure button is square if icon-only
+  const sizeClass = children ? sizeClasses[size] : "";
+  const iconOnlyClasses = !children ? "w-10 h-10" : "";
 
   return (
     <button
@@ -51,16 +50,14 @@ const Button: React.FC<ButtonProps> = ({
       type={type}
       className={`rounded focus:outline-none focus:ring-2 flex items-center justify-center ${sizeClass} ${colorClasses[color]} ${iconOnlyClasses} ${className}`}
     >
-      {/* Render icon only if no children are provided (icon-only) */}
       {!children && IconComponent && <IconComponent className="h-5 w-5" />}
 
-      {/* Render the icon on the left when children are provided */}
       {children && icon && iconPosition === "left" && IconComponent && (
         <IconComponent className="mr-2 h-5 w-5" />
       )}
-      {/* Render children if provided */}
+
       {children}
-      {/* Render the icon on the right when children are provided */}
+
       {children && icon && iconPosition === "right" && IconComponent && (
         <IconComponent className="ml-2 h-5 w-5" />
       )}
