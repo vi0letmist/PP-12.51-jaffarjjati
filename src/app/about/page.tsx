@@ -1,15 +1,16 @@
+"use client";
+
 import Button from "@/components/common/button";
 
 const About = () => {
+  const handleClick = () => {};
+
   return (
     <div>
       <div className="text-center text-white px-4">
         <h1>about</h1>
         <div className="flex space-x-4">
-          <Button
-            icon="SunIcon"
-            onClick={() => console.log("Sun Icon Clicked")}
-          >
+          <Button icon="SunIcon" onClick={() => handleClick()}>
             With Sun Icon
           </Button>
           <Button icon="MoonIcon" iconPosition="right" color="indigo">
@@ -23,7 +24,7 @@ const About = () => {
             color="red"
             onClick={() => console.log("Icon Only")}
           />
-          <Button color="red" onClick={() => console.log("Icon Only")}>
+          <Button color="red" onClick={() => handleClick()}>
             asasasasas
           </Button>
         </div>
