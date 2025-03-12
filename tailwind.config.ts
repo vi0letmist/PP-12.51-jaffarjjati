@@ -15,10 +15,10 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       fontFamily: {
-        'lauren-thompson': ['Lauren Thompson', 'sans-serif'],
+        "lauren-thompson": ["Lauren Thompson", "sans-serif"],
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 };
 export default config;
