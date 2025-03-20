@@ -12,6 +12,7 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   icon?: keyof typeof HeroIcons;
   iconPosition?: "left" | "right";
+  disabled?: boolean;
 }
 
 const sizeClasses = {
@@ -40,6 +41,7 @@ const Button: React.FC<ButtonProps> = ({
   type = "button",
   icon,
   iconPosition = "left",
+  disabled = false,
 }) => {
   const IconComponent = icon ? HeroIcons[icon] : null;
 
@@ -50,7 +52,10 @@ const Button: React.FC<ButtonProps> = ({
     <button
       onClick={onClick}
       type={type}
-      className={`rounded focus:outline-none focus:ring-2 flex items-center justify-center ${sizeClass} ${colorClasses[color]} ${iconOnlyClasses} ${className}`}
+      disabled={disabled}
+      className={`focus:outline-none focus:ring-2 flex items-center justify-center 
+        ${sizeClass} ${colorClasses[color]} ${iconOnlyClasses} ${className}
+        ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
     >
       {!children && IconComponent && <IconComponent className="h-5 w-5" />}
 
