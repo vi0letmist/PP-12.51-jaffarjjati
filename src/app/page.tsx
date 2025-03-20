@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
 import { useTheme } from "@/context/ThemeContext";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -14,29 +15,71 @@ import InstagramIcon from "@/components/icons/instagram";
 import photoProfile from "@/assets/images/julian.jpg";
 import CardTitleImage from "@/components/card/CardTitleImage";
 
-const sentence = `hai my name jetri, still in development. i just struck with words i 
-saw online: perfection is enemy of progress--so i deploy this site and continue to make it better.`;
+// const sentence = `hai my name jetri, still in development. i just struck with words i
+// saw online: perfection is enemy of progress--so i deploy this site and continue to make it better.`;\
+// const sentence = `hai my name Jaffar Jatmiko Jati, you can call me Jaffar. i'm a software engineer based in indonesia. i love to build things,
+// and i'm passionate about technology/programming and creative world. i'm especially drawn to frontend development, because it allows me to
+// combine my love for design and coding.`;
+const sentence = `hai, my name is jaffar jatmiko jati, but you can call me jaffar. i'm an introvert who loves creativity—whether through music, film, gaming, 
+or poetry. i find beauty in melancholic themes but also enjoy being active and collaborating, believing that creativity thrives in both solitude and shared experiences.`;
 const words = sentence.split(" ");
 
 const Home = () => {
   const { isDarkMode, toggleTheme } = useTheme();
   const { ref, inView } = useInView({
-    threshold: 0.5, // Trigger when 50% of the element is in view
-    triggerOnce: false, // Re-trigger the animation when entering viewport again
+    threshold: 0.5,
+    triggerOnce: false,
   });
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isTop, setIsTop] = useState(true);
+  const [isBottom, setIsBottom] = useState(false);
+
   const { ref: secondCardRef, inView: secondCardInView } = useInView({
-    threshold: 0.2, // Adjust sensitivity
-    triggerOnce: false, // Re-trigger animation when scrolling back
+    threshold: 0.2,
+    triggerOnce: false,
   });
 
   const handleSocialClick = (url: string) => {
     window.open(url, "_blank");
   };
 
+  const scrollUp = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const scrollDown = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ top: 300, behavior: "smooth" });
+    }
+    console.log("scroll down");
+  };
+
+  const checkScrollPosition = () => {
+    if (scrollRef.current) {
+      const { scrollTop, clientHeight, scrollHeight } = scrollRef.current;
+      setIsTop(scrollTop === 0);
+      setIsBottom(scrollTop + clientHeight >= scrollHeight - 5);
+    }
+  };
+
+  useEffect(() => {
+    const scrollableDiv = scrollRef.current;
+    if (scrollableDiv) {
+      scrollableDiv.addEventListener("scroll", checkScrollPosition);
+      checkScrollPosition();
+    }
+
+    return () => {
+      if (scrollableDiv) {
+        scrollableDiv.removeEventListener("scroll", checkScrollPosition);
+      }
+    };
+  }, []);
+
   return (
-    // <Layout backgroundImage={BgTreeBW.src} hasBackgroundImage>
-    //   Content Above Background Image
     <div>
       <div className="px-8">
         <div className="flex justify-start pl-[4rem]">
@@ -121,10 +164,10 @@ const Home = () => {
                     animate={
                       inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
                     }
-                    exit={{ opacity: 0 }} // Disappear instantly when leaving viewport
+                    exit={{ opacity: 0 }}
                     transition={{
-                      delay: inView ? index * 0.2 : 0, // Only delay when animating in
-                      duration: inView ? 0.5 : 0, // Remove transition on leaving
+                      delay: inView ? index * 0.2 : 0,
+                      duration: inView ? 0.5 : 0,
                     }}
                     style={{ display: "inline-block", marginRight: "4px" }}
                   >
@@ -135,11 +178,16 @@ const Home = () => {
             </div>
             <div className="md:col-start-3 md:col-span-2">
               <p>
-                i can explain a lot of word about why i like poetry so much, i
-                can explain a lot of word about why i like poetry so much, i can
-                explain a lot of word about why i like poetry so much, i can
-                explain a lot of word about why i like poetry so much, i can
-                explain a lot of word about why i like poetry so much
+                i’m a software engineer based in indonesia. i love to build
+                things, and i’m passionate about technology/programming and
+                creative world. i’m especially drawn to frontend development,
+                because it allows me to combine my love for design and coding.
+                <br />
+                <br />i love designing intuitive user experiences, experimenting
+                with animations, and making interfaces that feel smooth and
+                engaging. for me, frontend development is the perfect blend of
+                logic and creativity, where technical precision meets artistic
+                vision to create something valuable.
               </p>
             </div>
           </div>
@@ -153,21 +201,67 @@ const Home = () => {
         </h1>
 
         {/* Scrollable Section Container */}
-        <div className="flex-1 overflow-y-scroll snap-y snap-mandatory scrollbar-hide md:px-32">
+        <div
+          ref={scrollRef}
+          className="flex-1 overflow-y-scroll snap-y snap-mandatory scrollbar-hide md:px-32"
+        >
+          <div className="absolute flex flex-col gap-1 -mx-10 pt-8">
+            <Button
+              className={`${isDarkMode ? "border-white" : "border-black"} border`}
+              icon="ArrowLongUpIcon"
+              color={isDarkMode ? "black" : "white"}
+              onClick={scrollUp}
+              disabled={isTop}
+            />
+            <Button
+              className={`${isDarkMode ? "border-white" : "border-black"} border`}
+              icon="ArrowLongDownIcon"
+              color={isDarkMode ? "black" : "white"}
+              onClick={scrollDown}
+              disabled={isBottom}
+            />
+          </div>
           <CardTitleImage
-            className="min-h-[80vh] flex flex-col items-center justify-center text-white snap-start p-8"
+            className="min-h-[70vh] flex flex-col items-center justify-center text-white snap-start p-8"
             title="Project-06sdd"
-            image1={BgTreeBW}
-            image2={BgTreeBW}
-            link="1212"
-          />
+            image1={`/images/06sdd 2025-03-16 231058.png`}
+            image2={`/images/06sdd 2025-03-16 231642.png`}
+            link="https://project-06sdd.vercel.app/"
+          >
+            <h1 className="text-black">
+              i started building a library management system as a personal
+              project while learning backend development with python and django.
+              at first, my focus was just on creating an api to manage books,
+              users, and borrowing records. but after finishing the api, i
+              wanted to take it further and see it in action with a real use
+              case.
+              <br />
+              <br />i built it with that in mind, and i want this to be a
+              project that i keep improving over time. there’s always something
+              to refine, add, or optimize, and i see it as a way to continuously
+              learn and apply new things as i go.
+            </h1>
+          </CardTitleImage>
           <CardTitleImage
             className="min-h-[80vh] flex flex-col items-center justify-center text-white snap-start p-8"
             title="PT Aino Indonesia"
             image1={BgTreeBW}
             image2={BgTreeBW}
-            link="1213"
-          />
+          >
+            <h1 className="text-black">
+              i started building a library management system as a personal
+              project while learning backend development with python and django.
+              at first, my focus was just on creating an api to manage books,
+              users, and lending transactions. but after finishing the api, i
+              wanted to take it further and see it in action with a real use
+              case.
+              <br />
+              <br />i built it with that in mind, and i want this to be a
+              project that i keep improving over time. there’s always something
+              to refine, add, or optimize, and i see it as a way to continuously
+              learn and apply new things as i go.
+            </h1>
+          </CardTitleImage>
         </div>
       </div>
     </div>
