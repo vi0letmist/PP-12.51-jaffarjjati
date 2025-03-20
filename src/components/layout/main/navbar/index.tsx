@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const menuList = [
   { name: "home", destination: "/" },
-  { name: "about", destination: "/about" },
+  // { name: "about", destination: "/about" },
 ];
 
 const Navbar = () => {
