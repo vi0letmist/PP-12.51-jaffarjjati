@@ -47,15 +47,15 @@ const About = () => {
           </div>
           <div className="md:col-start-3 md:col-span-2">
             <p>
-              i'm a software engineer based in indonesia. i love creating
-              things, and i'm very passionate about tech/programming and
-              creative universe. i'm especially interested in frontend
-              development, as it allows me to do what i love – which is code as
+              I&apos;m a software engineer based in Indonesia. I love creating
+              things, and I&apos;m very passionate about tech/programming and
+              the creative universe. I&apos;m especially interested in frontend
+              development, as it allows me to do what I love – which is code as
               well as design.
               <br />
-              <br />i enjoy creating intuitive user interactions, playing around
+              <br />I enjoy creating intuitive user interactions, playing around
               with animations, and building interfaces that are interactive and
-              fluid. to me, frontend development is the ideal mixture of logic
+              fluid. To me, frontend development is the ideal mixture of logic
               and art, where technicality and creativity unite to form something
               practical.
             </p>
