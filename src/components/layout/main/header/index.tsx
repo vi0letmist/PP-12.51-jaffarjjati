@@ -19,7 +19,7 @@ const Header = () => {
   }, [isMobile]);
 
   return (
-    <header className="py-4 px-8">
+    <header className="py-4 px-8 md:px-16">
       {isMobile ? (
         <div className="relative flex items-center justify-between">
           <Bars3BottomLeftIcon

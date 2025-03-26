@@ -18,21 +18,21 @@ const Layout: React.FC<LayoutProps> = ({
   return (
     <ThemeProvider>
       <SafeHydrate>
-        <div className="relative w-full min-h-screen flex flex-col px-8">
+        <div className="relative w-full min-h-screen flex flex-col">
           {/* Background Image Section */}
           {hasBackgroundImage && backgroundImage && (
             <div
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{
                 backgroundImage: `url(${backgroundImage})`,
-                height: "100vh", // Covers the full initial viewport height
-                zIndex: -1, // Ensure it's behind the content
+                height: "100vh",
+                zIndex: -1,
               }}
             />
           )}
           <Header />
           <main
-            className={`flex-1 py-4 px-8 ${hasBackgroundImage && backgroundImage ? "relative z-10" : ""}`}
+            className={`flex-1 pt-4 px-8 md:px-16 ${hasBackgroundImage && backgroundImage ? "relative z-10" : ""}`}
           >
             {children}
           </main>
