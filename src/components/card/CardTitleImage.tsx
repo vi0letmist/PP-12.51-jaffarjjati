@@ -2,26 +2,32 @@ import React, { useState, ReactNode } from "react";
 import Image, { StaticImageData } from "next/image";
 import { useTheme } from "@/context/ThemeContext";
 import Button from "@/components/common/button";
+import useScrollable from "@/components/hooks/useScrollable";
 
+interface ImageData {
+  src: string | StaticImageData;
+  alt: string;
+  description?: string;
+}
 interface CardProps {
   className?: string;
   title: string;
-  image1: string | StaticImageData;
-  image2: string | StaticImageData;
+  images: ImageData[];
   link?: string;
-  children?: ReactNode; // Accepts dynamic content
+  children?: ReactNode;
 }
 
 const CardTitleImage: React.FC<CardProps> = ({
   className = "",
   title,
-  image1,
-  image2,
+  images,
   link = "",
-  children, // Accepts JSX content
+  children,
 }) => {
   const { isDarkMode } = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
+  const { ref, isScrollable, isTop, isBottom, scrollUp, scrollDown } =
+    useScrollable();
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -30,7 +36,7 @@ const CardTitleImage: React.FC<CardProps> = ({
   return (
     <div className={`${className}`}>
       <div
-        className={`relative border-2 ${isDarkMode ? "border-white" : "border-black"} z-10`}
+        className={`relative w-full border-2 ${isDarkMode ? "border-white" : "border-black"} z-10`}
       >
         <div
           className={`absolute inset-0 border-2 ${isDarkMode ? "border-white" : "border-black"} -m-6 top-[2.75rem] left-[2.75rem] pointer-events-none z-0 ${
@@ -41,59 +47,65 @@ const CardTitleImage: React.FC<CardProps> = ({
         {/* Card content with black border */}
         <div className="relative z-10">
           <div
-            className={`border-b px-4 grid grid-cols-4 ${isDarkMode ? "bg-black" : "bg-white"}`}
+            className={`border-b px-2 md:px-4 grid grid-cols-4 ${isDarkMode ? "bg-black" : "bg-white"}`}
           >
-            <div className="col-span-3">
+            <div className="col-span-4 md:col-span-3">
               <h2
                 className={`text-[1rem] sm:text-[2rem] lg:text-[4rem] ${isDarkMode ? "text-white" : "text-black"} font-bold font-lauren-thompson uppercase`}
               >
                 {title}
               </h2>
             </div>
-            <div className="col-span-1 flex justify-end items-center gap-2">
+            <div className="col-span-4 md:col-span-1 flex justify-end items-center gap-2">
               <Button
                 icon={
                   isExpanded ? "ArrowsPointingInIcon" : "ArrowsPointingOutIcon"
                 }
                 color={isDarkMode ? "black" : "white"}
-                className={`border ${isDarkMode ? "border-white" : "border-black"}`}
+                className={`border ${isDarkMode ? "border-white" : "border-black"} mb-2 md:mb-0`}
                 onClick={toggleExpand}
               />
               {link && (
                 <Button
                   icon="ArrowUpRightIcon"
                   color={isDarkMode ? "black" : "white"}
-                  className={`border ${isDarkMode ? "border-white" : "border-black"}`}
+                  className={`border ${isDarkMode ? "border-white" : "border-black"} mb-2 md:mb-0`}
                   onClick={() => window.open(link, "_blank")}
                 />
               )}
             </div>
           </div>
-          <div className="border-t-2 border-black flex flex-col md:flex-row lg:flex-row overflow-hidden">
-            <Image
-              src={image1}
-              alt="First Image"
-              width={100}
-              height={100}
-              className="relative max-w-[50vh] h-auto"
-              layout="responsive"
-            />
-            <Image
-              src={image2}
-              alt="Second Image"
-              width={100}
-              height={100}
-              className="relative max-w-[50vh]"
-              layout="responsive"
-            />
+          <div className="w-full border-t-2 border-black flex flex-wrap md:flex-row overflow-hidden bg-white">
+            {images
+              .slice(0, isExpanded ? images.length : 2)
+              .map((image, index) => (
+                <div key={index} className="w-1/2 p-2">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    width={500}
+                    height={500}
+                    className="w-full h-auto"
+                  />
+                  {isExpanded && image.description && (
+                    <p
+                      className={`text-xs mt-2 ${isDarkMode ? "text-white" : "text-black"}`}
+                    >
+                      {"( " + image.description + " )"}
+                    </p>
+                  )}
+                </div>
+              ))}
           </div>
         </div>
       </div>
 
-      {/* Dynamic content section */}
       {isExpanded && (
-        <div className="flex w-[100vh] flex-col md:flex-row lg:flex-row overflow-hidden pl-12 pr-6 py-4">
-          {children}
+        <div
+          ref={ref}
+          className="w-full min-w-0 max-h-40 flex flex-col md:flex-row lg:flex-row overflow-y-scroll pl-12 pr-6 py-4"
+        >
+          <div className="w-full"> {children}</div>
         </div>
       )}
     </div>
