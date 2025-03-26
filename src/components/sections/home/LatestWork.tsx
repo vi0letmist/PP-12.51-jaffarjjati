@@ -4,7 +4,6 @@ import { useRef, useState, useEffect } from "react";
 import { useTheme } from "@/context/ThemeContext";
 
 import Button from "@/components/common/button";
-import BgTreeBW from "@/assets/images/pexels-ian-panelo-7169401.jpg";
 import CardTitleImage from "@/components/card/CardTitleImage";
 
 const LatestWork = () => {
