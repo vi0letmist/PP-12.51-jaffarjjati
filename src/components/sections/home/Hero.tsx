@@ -8,7 +8,7 @@ import Social from "@/components/common/social";
 import LinkedInIcon from "@/components/icons/linkedin";
 import GithubIcon from "@/components/icons/github";
 import InstagramIcon from "@/components/icons/instagram";
-import photoProfile from "@/assets/images/julian.jpg";
+import photoProfile from "@/assets/images/1000067811.jpg";
 import BottomLeftArrowIcon from "@/components/icons/BottomLeftArrowIcon";
 
 const Hero = () => {
@@ -61,12 +61,6 @@ const Hero = () => {
           />
         </div>
         <div className="md:col-span-1 p-2 relative">
-          <div className="absolute -top-10 left-1/2 text-sm text-gray-600 font-semibold text-right py-4">
-            sowry, i don’t have a proper photo yet 😔
-          </div>
-
-          <BottomLeftArrowIcon className="absolute -right-10 top-[0.75rem] w-10 h-10 text-gray-500" />
-
           <Image
             src={photoProfile}
             alt="Description of the image"
