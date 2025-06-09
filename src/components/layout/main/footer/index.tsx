@@ -13,8 +13,7 @@ const Footer = () => {
       </div>
       <div className="col-span-1 p-4 border-t md:border-none border-black">
         <span className="text-sm">
-          © {new Date().getFullYear()} Jaffar Jatmiko Jati. All rights
-          reserved.
+          © {new Date().getFullYear()} jaffarjjati. All rights reserved.
         </span>
       </div>
     </div>
